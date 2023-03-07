@@ -24,20 +24,30 @@ namespace _7_03_L
             size = 0;
         }
 
+        public int Count => size;
+
+        private void resize(int newCapacity)
+        {
+            Console.WriteLine($"Resizing stack from {capacity} to {newCapacity}");
+            int[] newarr = new int[newCapacity];
+            for(int i = 0; i < size; i++)
+            {
+                newarr[i] = arr[i];
+            }
+            capacity = newCapacity;
+            arr = newarr;
+
+        }
+
         public void Push(int value)
         {
             Console.Write($"Try to push {value}...");
-            if (size < capacity)
+            if(size == capacity)
             {
-                arr[size++] = value;
-                Console.WriteLine($"Succes");
+                resize(capacity * 2);
             }
-            else
-            {
-                Console.Write($"Failed");
-                throw new StackFullException("Stack Full");
-                
-            }
+            arr[size++] = value;
+            Console.WriteLine("Succes.");
         }
 
         public bool Empty

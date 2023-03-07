@@ -33,6 +33,10 @@ MyStack ms = new MyStack();
 Random rnd = new Random();
 while (true)
 {
+    if(ms.Count == 100)
+    {
+        break;
+    }
     try
     {
         ms.Push(rnd.Next(1000));
