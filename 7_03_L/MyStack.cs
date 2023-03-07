@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _7_03_L
 {
-    public class MyStack
+    public class MyStack : IStack
     {
         private int[] arr;
         private int capacity;
@@ -30,7 +30,7 @@ namespace _7_03_L
         {
             Console.WriteLine($"Resizing stack from {capacity} to {newCapacity}");
             int[] newarr = new int[newCapacity];
-            for(int i = 0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
                 newarr[i] = arr[i];
             }
@@ -42,7 +42,7 @@ namespace _7_03_L
         public void Push(int value)
         {
             Console.Write($"Try to push {value}...");
-            if(size == capacity)
+            if (size == capacity)
             {
                 resize(capacity * 2);
             }
@@ -61,7 +61,11 @@ namespace _7_03_L
         {
             if (!this.Empty)
             {
-                size--; 
+                size--;
+                if (size == capacity / 4)
+                {
+                    resize(capacity / 2);
+                }
                 return arr[size];
             }
             else
